@@ -1,0 +1,367 @@
+/**
+ * ===================================
+ * MAIN.CSS - Shared Styles
+ * Self-Order App
+ * ===================================
+ */
+
+/* ===================================
+   CSS RESET
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===================================
+   CSS VARIABLES (Custom Properties)
+   =================================== */
+:root {
+    /* Primary Colors */
+    --green-primary: #1c9943;
+    --green-dark: #45A049;
+    --green-light: #E3F9EB;
+    
+    /* Text Colors */
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    
+    /* Background Colors */
+    --bg-main: #F4F6F1;
+    --bg-white: #ffffff;
+    --bg-gray: #F3F4F6;
+    
+    /* Shadows */
+    --shadow-soft: 
+        0px 2px 6px rgba(0, 0, 0, 0.04),
+        0px 8px 20px rgba(0, 0, 0, 0.06);
+    --shadow-card:
+        0px 4px 12px rgba(0, 0, 0, 0.05),
+        0px 12px 24px rgba(0, 0, 0, 0.06);
+    
+    /* Border Radius */
+    --border-radius: 18px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 22px;
+    --border-radius-full: 50px;
+}
+
+/* ===================================
+   BASE STYLES
+   =================================== */
+body { 
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "SF Pro Text", "SF Pro Display",
+                 "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-main); 
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* ===================================
+   TOAST NOTIFICATION
+   =================================== */
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: white;
+    color: var(--text-primary);
+    padding: 14px 20px;
+    border-radius: 16px;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 12px 32px rgba(0, 0, 0, 0.12);
+    z-index: 99999;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: calc(100% - 32px);
+    min-width: 280px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.toast-notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Toast Icon Container */
+.toast-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+}
+
+/* Success Toast */
+.toast-notification.success .toast-icon {
+    background: var(--green-primary);
+    color: white;
+}
+
+/* Error Toast */
+.toast-notification.error {
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.toast-notification.error .toast-icon {
+    background: #EF4444;
+    color: white;
+}
+
+/* Toast Message */
+.toast-message {
+    flex: 1;
+    line-height: 1.4;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Close Button */
+.toast-close {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: var(--bg-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.toast-close:hover {
+    background: #E5E7EB;
+    color: #374151;
+}
+
+.toast-close:active {
+    transform: scale(0.9);
+}
+
+/* Progress Bar */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--green-primary);
+    border-radius: 0 0 16px 16px;
+    animation: progressBar 3s linear;
+}
+
+.toast-notification.error .toast-progress {
+    background: #EF4444;
+}
+
+@keyframes progressBar {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+/* ===================================
+   SHARED COMPONENTS
+   =================================== */
+
+/* Back Arrow */
+.back-arrow { 
+    position: static;
+    left: 16px; 
+    top: 20px;
+    z-index: 101; 
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.back-arrow:hover {
+    transform: translateX(-2px);
+}
+
+.back-arrow i {
+    font-size: 20px;
+    color: #000;
+}
+
+/* Table Badge */
+.table-badge { 
+    background: transparent;
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.table-badge:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.show {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Bottom Sheet Modal */
+.bottom-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    z-index: 2001;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.bottom-modal.show {
+    transform: translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+}
+
+/* Close Button for Modals */
+.close-btn {
+    font-size: 24px;
+    color: var(--text-muted);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--text-secondary);
+    background: var(--bg-gray);
+    border-radius: 50%;
+}
+
+/* Primary Button */
+.btn-primary { 
+    background: var(--green-primary); 
+    color: white; 
+    border: none; 
+    padding: 10px 28px; 
+    border-radius: var(--border-radius-full); 
+    font-weight: 500; 
+    font-size: 14px; 
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--green-dark);
+    box-shadow: 0 4px 12px rgba(28, 153, 67, 0.3);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background: var(--bg-gray);
+    color: var(--text-secondary);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-full);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #E5E7EB;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+@media (max-width: 640px) {
+    .toast-notification {
+        min-width: unset;
+        width: calc(100% - 32px);
+    }
+}
+
+@media (min-width: 768px) {
+    /* Add tablet+ specific styles here */
+}

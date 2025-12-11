@@ -1,0 +1,169 @@
+/**
+ * ===================================
+ * SUCCESS.CSS - Success Page Styles
+ * For: orders/success.blade.php
+ * ===================================
+ */
+
+.success-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.success-card {
+    background: white;
+    border-radius: 32px;
+    padding: 48px 32px 32px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+}
+
+/* Cloche Icon */
+.cloche-icon {
+    margin: 0 auto 24px;
+    display: inline-block;
+}
+
+.cloche-svg {
+    width: 120px;
+    height: 120px;
+}
+
+/* Title Section */
+.success-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.success-subtitle {
+    font-size: 15px;
+    color: #6B7280;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+/* Estimated Time Badge */
+.estimate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #dfe8da;
+    color: #198c3e;
+    padding: 5px 15px;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.estimate-badge i {
+    font-size: 16px;
+}
+
+/* Info Section */
+.info-section {
+    background: #F9FAFB;
+    padding: 0px 16px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.info-row:not(:last-child) {
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #6B7280;
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 16px;
+    color: #111827;
+    font-weight: 450;
+    letter-spacing: 0.02em;
+}
+
+.info-value.status {
+    color: #111827;
+}
+
+/* Back Button */
+.back-btn {
+    background: #F3F4F6;
+    color: #374151;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-btn:hover {
+    background: #E5E7EB;
+}
+
+.back-btn:active {
+    transform: scale(0.98);
+}
+
+/* Back Arrow Top Left - Success variant */
+.success-page .back-arrow {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    z-index: 101;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.success-page .back-arrow i {
+    font-size: 18px;
+    color: #374151;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .success-card {
+        padding: 40px 24px 24px;
+    }
+
+    .success-title {
+        font-size: 20px;
+    }
+
+    .cloche-svg {
+        width: 100px;
+        height: 100px;
+    }
+}
