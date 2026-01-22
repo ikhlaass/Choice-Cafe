@@ -22,25 +22,25 @@
     --green-primary: #1c9943;
     --green-dark: #45A049;
     --green-light: #E3F9EB;
-    
+
     /* Text Colors */
     --text-primary: #111827;
     --text-secondary: #6B7280;
     --text-muted: #9CA3AF;
-    
+
     /* Background Colors */
     --bg-main: #F4F6F1;
     --bg-white: #ffffff;
     --bg-gray: #F3F4F6;
-    
+
     /* Shadows */
-    --shadow-soft: 
+    --shadow-soft:
         0px 2px 6px rgba(0, 0, 0, 0.04),
         0px 8px 20px rgba(0, 0, 0, 0.06);
     --shadow-card:
         0px 4px 12px rgba(0, 0, 0, 0.05),
         0px 12px 24px rgba(0, 0, 0, 0.06);
-    
+
     /* Border Radius */
     --border-radius: 18px;
     --border-radius-sm: 8px;
@@ -51,11 +51,11 @@
 /* ===================================
    BASE STYLES
    =================================== */
-body { 
+body {
     font-family: -apple-system, BlinkMacSystemFont,
-                 "SF Pro Text", "SF Pro Display",
-                 "Inter", "Segoe UI", Roboto, sans-serif;
-    background: var(--bg-main); 
+        "SF Pro Text", "SF Pro Display",
+        "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-main);
     color: var(--text-primary);
     line-height: 1.5;
 }
@@ -82,23 +82,20 @@ button {
     transform: translateX(-50%) translateY(-100px);
     background: white;
     color: var(--text-primary);
-    padding: 14px 20px;
-    border-radius: 16px;
-    box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.08),
-        0 12px 32px rgba(0, 0, 0, 0.12);
+    padding: 12px 18px;
+    border-radius: 50px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     z-index: 99999;
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     max-width: calc(100% - 32px);
-    min-width: 280px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    min-width: 240px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .toast-notification.show {
@@ -108,20 +105,18 @@ button {
 
 /* Toast Icon Container */
 .toast-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* Success Toast */
 .toast-notification.success .toast-icon {
-    background: var(--green-primary);
-    color: white;
+    color: var(--green-primary);
 }
 
 /* Error Toast */
@@ -130,62 +125,51 @@ button {
 }
 
 .toast-notification.error .toast-icon {
-    background: #EF4444;
-    color: white;
+    color: #EF4444;
 }
 
 /* Toast Message */
 .toast-message {
     flex: 1;
     line-height: 1.4;
-    color: #374151;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 /* Close Button */
 .toast-close {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border: none;
-    background: var(--bg-gray);
-    border-radius: 50%;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s;
     flex-shrink: 0;
-    color: var(--text-secondary);
-    font-size: 12px;
+    color: var(--text-muted);
+    font-size: 14px;
 }
 
 .toast-close:hover {
-    background: #E5E7EB;
-    color: #374151;
+    color: var(--text-primary);
 }
 
 .toast-close:active {
     transform: scale(0.9);
 }
 
-/* Progress Bar */
-.toast-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    background: var(--green-primary);
-    border-radius: 0 0 16px 16px;
-    animation: progressBar 3s linear;
-}
-
-.toast-notification.error .toast-progress {
-    background: #EF4444;
-}
+/* Progress Bar - REMOVED for cleaner design */
 
 @keyframes progressBar {
-    from { width: 100%; }
-    to { width: 0%; }
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
 }
 
 /* ===================================
@@ -193,11 +177,11 @@ button {
    =================================== */
 
 /* Back Arrow */
-.back-arrow { 
+.back-arrow {
     position: static;
-    left: 16px; 
+    left: 16px;
     top: 20px;
-    z-index: 101; 
+    z-index: 101;
     width: 32px;
     height: 32px;
     display: flex;
@@ -218,7 +202,7 @@ button {
 }
 
 /* Table Badge */
-.table-badge { 
+.table-badge {
     background: transparent;
     color: var(--text-primary);
     padding: 6px 12px;
@@ -255,8 +239,13 @@ button {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* Bottom Sheet Modal */
@@ -314,14 +303,14 @@ button {
 }
 
 /* Primary Button */
-.btn-primary { 
-    background: var(--green-primary); 
-    color: white; 
-    border: none; 
-    padding: 10px 28px; 
-    border-radius: var(--border-radius-full); 
-    font-weight: 500; 
-    font-size: 14px; 
+.btn-primary {
+    background: var(--green-primary);
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: var(--border-radius-full);
+    font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
     transition: all 0.2s;
 }

@@ -25,7 +25,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Store the order
+     * Store the order and create Midtrans payment
      */
     public function store(Request $request)
     {
@@ -41,25 +41,43 @@ class OrderController extends Controller
 
         $items = array_values($cart);
         $total = $request->input('total_amount');
+        $tableNumber = Session::get('table_number', '01');
 
         // Generate transaction code
-        $transactionCode = 'JV' . rand(1000, 9999);
+        $transactionCode = 'JV' . date('ymdHis') . rand(100, 999);
+
+        // Create Midtrans payment
+        $midtransService = new \App\Services\MidtransService();
+        $result = $midtransService->createPayment([
+            'transaction_code' => $transactionCode,
+            'amount' => $total,
+            'table_number' => $tableNumber,
+            'items' => $items,
+        ]);
+
+        if (!$result['success']) {
+            \Log::error('Midtrans Payment Failed', ['result' => $result]);
+            return redirect()->back()
+                ->with('error', 'Payment gateway error: ' . ($result['error'] ?? 'Unknown error'));
+        }
 
         // Store order info in session
-        Session::put('last_order', [
+        Session::put('pending_order', [
             'transaction_code' => $transactionCode,
             'total_amount' => $total,
-            'payment_method' => 'qris', // Fixed to QRIS only
+            'payment_method' => 'QRIS',
             'items' => $items,
-            'status' => 'cooking',
-            'estimated_time' => '15 Min'
+            'status' => 'pending_payment',
+            'estimated_time' => '15 Min',
+            'snap_token' => $result['snap_token'] ?? null,
+            'expiry_date' => now()->addHour()->toIso8601String(),
         ]);
 
         // Clear cart
         Session::forget('cart');
 
-        return redirect()->route('orders.success')
-            ->with('success', 'Order placed successfully!');
+        // Redirect to payment page
+        return redirect()->route('payment.show', ['transaction' => $transactionCode]);
     }
 
     /**

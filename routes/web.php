@@ -46,6 +46,45 @@ Route::post('/order/store', [OrderController::class, 'store'])->name('order.stor
 Route::get('/order/success', [OrderController::class, 'success'])->name('orders.success');
 
 
+// ============================================
+// PAYMENT (XENDIT QRIS)
+// ============================================
+use App\Http\Controllers\PaymentController;
+
+// Show payment page
+Route::get('/payment/{transaction}', [PaymentController::class, 'show'])->name('payment.show');
+
+// Payment success redirect
+Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+
+// Payment failed redirect
+Route::get('/payment/failed', [PaymentController::class, 'failed'])->name('payment.failed');
+
+// Xendit webhook
+Route::post('/xendit/webhook', [PaymentController::class, 'webhook'])->name('xendit.webhook');
+
+// Check payment status (AJAX)
+Route::post('/payment/check-status', [PaymentController::class, 'checkStatus'])->name('payment.checkStatus');
+
+
+// ============================================
+// QR TABLE SYSTEM
+// ============================================
+use App\Http\Controllers\TableController;
+
+// Customer scans QR code
+Route::get('/table/{number}', [TableController::class, 'scan'])->name('table.scan');
+
+// QR Generator page (for owner to generate QR codes)
+Route::get('/qr-generator', [TableController::class, 'qrGenerator'])->name('qr.generator');
+
+// Download single QR code
+Route::get('/qr-download/{number}', [TableController::class, 'downloadQR'])->name('qr.download');
+
+// Download all QR codes as ZIP
+Route::get('/qr-download-all', [TableController::class, 'downloadAllQR'])->name('qr.downloadAll');
+
+
 /*
 |--------------------------------------------------------------------------
 | CHANGELOG:
@@ -57,3 +96,6 @@ Route::get('/order/success', [OrderController::class, 'success'])->name('orders.
 | ✅ Clean, efficient routing structure
 |--------------------------------------------------------------------------
 */
+
+// Simulate payment success (for demo/testing)
+Route::post('/payment/simulate-success', [PaymentController::class, 'simulateSuccess'])->name('payment.simulate-success');

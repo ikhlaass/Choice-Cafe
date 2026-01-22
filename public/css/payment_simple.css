@@ -1,0 +1,66 @@
+/* Transaction Info - Clean Design */
+.transaction-info {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #E5E7EB;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.info-row:not(:last-child) {
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.info-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.info-value.amount {
+    font-size: 18px;
+    color: var(--green-primary);
+    font-weight: 700;
+}
+
+/* Payment Button - Simple & Clean */
+.btn-open-payment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--green-primary);
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.2s;
+    margin-bottom: 20px;
+}
+
+.btn-open-payment:hover {
+    background: #15803d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(28, 153, 67, 0.3);
+    color: white;
+}
+
+.btn-open-payment i {
+    font-size: 18px;
+}

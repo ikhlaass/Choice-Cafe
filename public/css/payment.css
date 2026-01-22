@@ -1,0 +1,418 @@
+/**
+ * ===================================
+ * PAYMENT.CSS - Payment Page Styles (Redesigned)
+ * For: payment/qris.blade.php
+ * ===================================
+ */
+
+.payment-page {
+    min-height: 100vh;
+    background: #F4F6F1;
+}
+
+/* Header */
+.payment-header {
+    background: transparent;
+    padding: 16px 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.payment-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    flex: 1;
+}
+
+/* Container */
+.payment-container {
+    padding: 8px 16px 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Transaction Card */
+.transaction-card {
+    background: white;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.transaction-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.transaction-row.highlight {
+    border-top: 1px solid #F3F4F6;
+    padding-top: 16px;
+    margin-top: 8px;
+}
+
+.transaction-row .label {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.transaction-row .value {
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.transaction-row .amount {
+    color: var(--green-primary);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* QRIS Section */
+.qris-section {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+/* Modern Title */
+.qris-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.qris-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* QR Code Container */
+.qr-code-container {
+    background: #F9FAFB;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: auto;
+}
+
+.qr-code-image {
+    max-width: 160px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Payment Instructions - Modern */
+.payment-instructions {
+    margin-bottom: 20px;
+}
+
+.instruction-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.step-icon {
+    width: 36px;
+    height: 36px;
+    background: #F0FDF4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-icon i {
+    font-size: 16px;
+    color: var(--green-primary);
+}
+
+.step-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.step-text strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.step-text span {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* How to Pay - Ultra Minimal */
+.how-to-pay {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.pay-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.step-num {
+    width: 28px;
+    height: 28px;
+    background: var(--green-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.step-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-align: center;
+}
+
+.qr-fallback {
+    text-align: center;
+    color: #6B7280;
+}
+
+.qr-fallback i {
+    font-size: 64px;
+    color: #D1D5DB;
+    margin-bottom: 16px;
+}
+
+/* Payment Steps - Polished */
+.payment-steps {
+    background: #F9FAFB;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.payment-steps p {
+    font-size: 13px;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-steps p:last-child {
+    margin-bottom: 0;
+}
+
+.payment-steps p::before {
+    content: attr(data-step);
+    width: 22px;
+    height: 22px;
+    background: var(--green-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.qr-fallback p {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.btn-fallback {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--green-primary) 0%, #15803d 100%);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(28, 153, 67, 0.3);
+}
+
+.btn-fallback:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(28, 153, 67, 0.4);
+    color: white;
+}
+
+.btn-fallback:active {
+    transform: translateY(0);
+}
+
+/* Payment Instructions */
+.payment-instructions {
+    margin-bottom: 20px;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    color: #374151;
+    font-size: 14px;
+}
+
+.step-number {
+    width: 28px;
+    height: 28px;
+    background: var(--green-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* Timer */
+.payment-timer {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #E3F9EB, #D1F4E0);
+    border-radius: 50px;
+    color: var(--green-primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 auto 24px;
+    box-shadow: 0 2px 6px rgba(28, 153, 67, 0.15);
+}
+
+.payment-timer i {
+    font-size: 14px;
+}
+
+.payment-timer strong {
+    font-weight: 700;
+}
+
+/* Status Card */
+.status-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Status Indicator - Integrated */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background: #F9FAFB;
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.status-indicator span {
+    font-weight: 500;
+}
+
+/* Spinner Animation */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid #E5E7EB;
+    border-top: 3px solid var(--green-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Status Icons */
+.status-indicator i {
+    font-size: 40px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .payment-container {
+        padding: 16px 12px 32px;
+    }
+
+    .qris-section {
+        padding: 24px 16px;
+    }
+
+    .qr-code-image {
+        max-width: 200px;
+    }
+
+    .qris-header h2 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 640px) {
+    .qr-code-container {
+        min-height: 320px;
+    }
+
+    .qr-code-image {
+        max-width: 280px;
+    }
+}
+
+/* Simple Payment Guide */
+.payment-guide {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0 0 20px;
+    line-height: 1.5;
+}
