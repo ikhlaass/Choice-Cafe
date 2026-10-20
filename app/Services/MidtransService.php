@@ -8,13 +8,21 @@ use Midtrans\Transaction;
 
 class MidtransService
 {
+    protected $serverKey;
+    protected $isProduction;
+
     public function __construct()
     {
         // Set Midtrans configuration
-        Config::$serverKey = config('services.midtrans.server_key');
-        Config::$isProduction = config('services.midtrans.is_production');
-        Config::$isSanitized = true;
-        Config::$is3ds = true;
+        $this->serverKey = config('services.midtrans.server_key');
+        $this->isProduction = (bool) config('services.midtrans.is_production', false);
+
+        if (!empty($this->serverKey)) {
+            Config::$serverKey = $this->serverKey;
+            Config::$isProduction = $this->isProduction;
+            Config::$isSanitized = true;
+            Config::$is3ds = true;
+        }
     }
 
     /**
@@ -25,6 +33,18 @@ class MidtransService
      */
     public function createPayment($orderData)
     {
+        // If Midtrans Server Key is empty, fallback gracefully to simulation/demo mode
+        if (empty($this->serverKey)) {
+            \Log::info('Midtrans Server Key is not configured. Falling back to Demo mode for order: ' . $orderData['transaction_code']);
+
+            return [
+                'success' => true,
+                'is_demo' => true,
+                'snap_token' => null,
+                'transaction_code' => $orderData['transaction_code'],
+            ];
+        }
+
         try {
             $params = [
                 'transaction_details' => [
@@ -44,6 +64,7 @@ class MidtransService
 
             return [
                 'success' => true,
+                'is_demo' => false,
                 'snap_token' => $snapToken,
                 'transaction_code' => $orderData['transaction_code'],
             ];

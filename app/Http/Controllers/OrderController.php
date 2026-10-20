@@ -25,7 +25,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Store the order and create Midtrans payment
+     * Store the order directly (Bayar di Kasir / Tunai - Tanpa payment gateway)
      */
     public function store(Request $request)
     {
@@ -36,7 +36,7 @@ class OrderController extends Controller
         $cart = Session::get('cart', []);
         
         if (empty($cart)) {
-            return redirect()->route('home')->with('error', 'Cart is empty!');
+            return redirect()->route('home')->with('error', 'Keranjang masih kosong!');
         }
 
         $items = array_values($cart);
@@ -46,38 +46,36 @@ class OrderController extends Controller
         // Generate transaction code
         $transactionCode = 'JV' . date('ymdHis') . rand(100, 999);
 
-        // Create Midtrans payment
-        $midtransService = new \App\Services\MidtransService();
-        $result = $midtransService->createPayment([
-            'transaction_code' => $transactionCode,
-            'amount' => $total,
-            'table_number' => $tableNumber,
+        // Save order directly into database
+        $order = \App\Models\Order::create([
+            'customer_name' => 'Meja ' . str_pad($tableNumber, 2, '0', STR_PAD_LEFT),
+            'customer_email' => 'meja' . str_pad($tableNumber, 2, '0', STR_PAD_LEFT) . '@choicecafe.com',
+            'customer_phone' => '08123456789',
+            'notes' => 'Transaksi: #' . $transactionCode . ' (Bayar di Kasir / Tunai)',
+            'total_amount' => $total,
+            'status' => 'pending',
             'items' => $items,
         ]);
 
-        if (!$result['success']) {
-            \Log::error('Midtrans Payment Failed', ['result' => $result]);
-            return redirect()->back()
-                ->with('error', 'Payment gateway error: ' . ($result['error'] ?? 'Unknown error'));
-        }
-
-        // Store order info in session
-        Session::put('pending_order', [
+        // Store completed order info in session for success display
+        Session::put('last_order', [
+            'id' => $order->id,
             'transaction_code' => $transactionCode,
             'total_amount' => $total,
-            'payment_method' => 'QRIS',
+            'table_number' => $tableNumber,
+            'payment_method' => 'Bayar di Kasir (Tunai)',
             'items' => $items,
-            'status' => 'pending_payment',
-            'estimated_time' => '15 Min',
-            'snap_token' => $result['snap_token'] ?? null,
-            'expiry_date' => now()->addHour()->toIso8601String(),
+            'status' => 'cooking',
+            'estimated_time' => '15 Menit',
+            'created_at' => now(),
         ]);
 
         // Clear cart
         Session::forget('cart');
 
-        // Redirect to payment page
-        return redirect()->route('payment.show', ['transaction' => $transactionCode]);
+        // Redirect directly to success page
+        return redirect()->route('orders.success')
+            ->with('success', 'Pesanan berhasil dikonfirmasi!');
     }
 
     /**

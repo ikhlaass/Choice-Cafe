@@ -18,34 +18,38 @@
    CSS VARIABLES (Custom Properties)
    =================================== */
 :root {
-    /* Primary Colors */
-    --green-primary: #1c9943;
-    --green-dark: #45A049;
-    --green-light: #E3F9EB;
+    /* Warm Espresso & Amber Caramel Theme */
+    --cafe-espresso: #231815;
+    --cafe-espresso-dark: #1A110F;
+    --cafe-caramel: #C2611A;
+    --cafe-caramel-hover: #A84E0B;
+    --cafe-caramel-light: #FDF4ED;
+    --cafe-amber: #D97706;
 
     /* Text Colors */
-    --text-primary: #111827;
-    --text-secondary: #6B7280;
-    --text-muted: #9CA3AF;
+    --text-primary: #231815;
+    --text-secondary: #5C4E47;
+    --text-muted: #8C7D75;
 
     /* Background Colors */
-    --bg-main: #F4F6F1;
-    --bg-white: #ffffff;
-    --bg-gray: #F3F4F6;
+    --bg-main: #F7F4EE;
+    --bg-white: #FFFFFF;
+    --bg-subtle: #F4EFEA;
+    --bg-gray: #EDE5DC;
+
+    /* Borders */
+    --border-warm: #EAE3D9;
+    --border-light: #F2ECE4;
 
     /* Shadows */
-    --shadow-soft:
-        0px 2px 6px rgba(0, 0, 0, 0.04),
-        0px 8px 20px rgba(0, 0, 0, 0.06);
-    --shadow-card:
-        0px 4px 12px rgba(0, 0, 0, 0.05),
-        0px 12px 24px rgba(0, 0, 0, 0.06);
+    --shadow-soft: 0px 4px 14px rgba(35, 24, 21, 0.04);
+    --shadow-card: 0px 6px 20px rgba(35, 24, 21, 0.06);
 
     /* Border Radius */
-    --border-radius: 18px;
+    --border-radius: 16px;
     --border-radius-sm: 8px;
-    --border-radius-lg: 22px;
-    --border-radius-full: 50px;
+    --border-radius-lg: 20px;
+    --border-radius-full: 9999px;
 }
 
 /* ===================================

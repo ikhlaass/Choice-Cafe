@@ -32,9 +32,14 @@ class PaymentController extends Controller
             return redirect()->route('home')->with('error', 'No order found!');
         }
 
+        // Save order to MySQL database
+        $this->saveOrderToDatabase($order, 'paid');
+
         // Move to completed order
         Session::put('last_order', array_merge($order, [
-            'status' => 'cooking'
+            'status' => 'cooking',
+            'payment_status' => 'paid',
+            'payment_method' => 'Midtrans QRIS',
         ]));
         Session::forget('pending_order');
 
@@ -62,6 +67,9 @@ class PaymentController extends Controller
             return redirect()->route('home')->with('error', 'No order found!');
         }
 
+        // Save order to MySQL database
+        $this->saveOrderToDatabase($order, 'paid');
+
         // Mark as completed
         Session::put('last_order', array_merge($order, [
             'status' => 'cooking',
@@ -72,6 +80,28 @@ class PaymentController extends Controller
 
         return redirect()->route('orders.success')
             ->with('success', 'Payment simulated successfully!');
+    }
+
+    /**
+     * Helper to save order to database
+     */
+    protected function saveOrderToDatabase(array $orderData, string $status = 'paid')
+    {
+        try {
+            $tableNum = $orderData['table_number'] ?? Session::get('table_number', '01');
+            return \App\Models\Order::create([
+                'customer_name' => 'Meja ' . str_pad($tableNum, 2, '0', STR_PAD_LEFT),
+                'customer_email' => 'table' . str_pad($tableNum, 2, '0', STR_PAD_LEFT) . '@choicecafe.com',
+                'customer_phone' => '08123456789',
+                'notes' => 'Transaksi: ' . ($orderData['transaction_code'] ?? '-'),
+                'total_amount' => $orderData['total_amount'] ?? 0,
+                'status' => $status,
+                'items' => $orderData['items'] ?? [],
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Failed to save order to database: ' . $e->getMessage());
+            return null;
+        }
     }
 
     /**
